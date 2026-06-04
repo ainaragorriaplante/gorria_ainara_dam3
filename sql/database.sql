@@ -1,3 +1,10 @@
+/*
+=========================================
+AUTOR: AINARA_GORRIA_DAM3
+FICHERO: inserts.sql
+DESCRIPCIÓN: Datos iniciales de prueba
+=========================================
+*/
 drop table socs cascade;
 drop table incidentes cascade;
 drop table informes_incidente cascade;
