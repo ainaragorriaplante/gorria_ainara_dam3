@@ -1,3 +1,4 @@
+
 /*
 =========================================
 AUTOR: AINARA GORRIA
@@ -6,3 +7,6 @@ EXAMEN JDBC AWS RDS
 FECHA: 04/06/2026
 =========================================
 */
+public class IncidenteDAOImpl {
+    
+}
