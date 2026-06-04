@@ -1,4 +1,3 @@
-
 /*
 =========================================
 AUTOR: AINARA GORRIA
@@ -11,6 +10,7 @@ package examen.gorria.ainara.dao;
 
 import examen.gorria.ainara.beans.Incidente;
 import examen.gorria.ainara.beans.Soc;
+import examen.gorria.ainara.beans.InformeIncidente;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -141,6 +141,7 @@ public class IncidenteDAOImpl extends AbstractDAO<Incidente> {
         }
         return lista;
     }
+
     // PARA EL TEST 5:
     public ArrayList<Incidente> findIncidentesBySoc(int socId) {
         ArrayList<Incidente> lista = new ArrayList<>();
@@ -210,6 +211,7 @@ public class IncidenteDAOImpl extends AbstractDAO<Incidente> {
         }
         return inc;
     }
+
     // Bloque 6: BONUS_QUERY_ADVANCED - INCIDENTES_CRITICOS
     // Justificación: Esta consulta vive aquí y no en AbstractDAO porque es 
     // específica del dominio de Incidente. Utilizamos INNER JOIN para hidratar 

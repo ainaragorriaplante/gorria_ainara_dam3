@@ -88,16 +88,16 @@ public class Main {
         if (incidenteConInforme != null && incidenteConInforme.getInforme() != null) {
             System.out.println("Incidente: " + incidenteConInforme.getCodigoIncidente() +
                                "\n   -> Severidad del Informe: " + incidenteConInforme.getInforme().getNivelSeveridad() +
-                               "\n   -> Conclusión: " + incidenteConInforme.getInforme().getConclusion() + "\n");
+                               "\n   -> Conclusion: " + incidenteConInforme.getInforme().getConclusion() + "\n");
         }
 
         // ---------------------------------------------------------
-        // BLOQUE 6: INCIDENTES CRÍTICOS
+        // BLOQUE 6: INCIDENTES CRITICOS
         // ---------------------------------------------------------
-        System.out.println("--- TEST BLOQUE 6: FIND INCIDENTES CRÍTICOS ---");
+        System.out.println("--- TEST BLOQUE 6: FIND INCIDENTES CRITICOS ---");
         ArrayList<Incidente> criticos = incidenteDao.findIncidentesCriticos();
         for (Incidente i : criticos) {
-            System.out.println("CRÍTICO -> Código: " + i.getCodigoIncidente() + 
+            System.out.println("CRITICO -> Codigo: " + i.getCodigoIncidente() + 
                                " | SOC: " + i.getSoc().getNombre() + 
                                " (" + i.getSoc().getPais() + ")" +
                                " | Severidad: " + i.getInforme().getNivelSeveridad());
@@ -108,20 +108,11 @@ public class Main {
         // BLOQUE 7: DYNAMIC UPDATE ENGINE
         // ---------------------------------------------------------
         System.out.println("--- TEST BLOQUE 7: DYNAMIC UPDATE ENGINE ---");
-        /* JUSTIFICACIÓN DE LA SOLUCIÓN (Requisito obligatorio):
-           El Update dinámico implementado en AbstractDAO (y utilizado en InformeIncidenteDAOImpl)
-           permite actualizar únicamente los campos que han sido seteados en el objeto Java.
-           Si un campo no se rellena, no se añade al SET de la consulta SQL.
-           Esto evita crear múltiples métodos como updateConclusion(), updateSeveridad(),
-           y concentra la responsabilidad de construcción SQL dinámica de forma segura usando
-           PreparedStatement para evitar inyección SQL. Mantenemos el Principio Abierto/Cerrado.
-        */
         InformeIncidente infModificado = new InformeIncidente();
         infModificado.setId(3); // Modificamos el informe con ID 3
         infModificado.setConclusion("Actualizado por DYNAMIC UPDATE ENGINE el " + new java.util.Date());
-        // NO seteamos nivelSeveridad ni malwareDetectado, por lo que el DAO no los actualizará.
         
         informeDao.update(infModificado);
-        System.out.println("Informe ID 3 actualizado dinámicamente. Revisar base de datos.");
+        System.out.println("Informe ID 3 actualizado dinamicamente. Revisar base de datos.");
     }
 }
