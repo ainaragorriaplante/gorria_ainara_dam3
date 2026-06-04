@@ -141,7 +141,75 @@ public class IncidenteDAOImpl extends AbstractDAO<Incidente> {
         }
         return lista;
     }
+    // PARA EL TEST 5:
+    public ArrayList<Incidente> findIncidentesBySoc(int socId) {
+        ArrayList<Incidente> lista = new ArrayList<>();
+        String sql = "SELECT i.*, s.nombre AS soc_nombre, s.pais, s.nivel_seguridad " +
+                     "FROM incidentes i " +
+                     "INNER JOIN socs s ON i.fk_soc_id = s.id " +
+                     "WHERE i.fk_soc_id = ?";
+                     
+        motorSql.connect();
+        try (PreparedStatement ps = motorSql.prepare(sql)) {
+            ps.setInt(1, socId);
+            try (ResultSet rs = motorSql.executeQuery(ps)) {
+                while (rs.next()) {
+                    Incidente inc = new Incidente();
+                    inc.setId(rs.getInt("id"));
+                    inc.setCodigoIncidente(rs.getString("codigo_incidente"));
+                    inc.setEstado(rs.getString("estado"));
+                    // Mapeo
+                    Soc soc = new Soc();
+                    soc.setId(rs.getInt("fk_soc_id"));
+                    soc.setNombre(rs.getString("soc_nombre"));
+                    soc.setPais(rs.getString("pais"));
+                    inc.setSoc(soc);
+                    
+                    lista.add(inc);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            motorSql.disconnect();
+        }
+        return lista;
+    }
 
+    // PARA EL TEST 6:
+    public Incidente findIncidenteWithInforme(int incidenteId) {
+        Incidente inc = null;
+        String sql = "SELECT i.*, inf.id AS inf_id, inf.malware_detectado, inf.nivel_severidad, inf.conclusion " +
+                     "FROM incidentes i " +
+                     "INNER JOIN informes_incidente inf ON i.id = inf.fk_incidente_id " +
+                     "WHERE i.id = ?";
+                     
+        motorSql.connect();
+        try (PreparedStatement ps = motorSql.prepare(sql)) {
+            ps.setInt(1, incidenteId);
+            try (ResultSet rs = motorSql.executeQuery(ps)) {
+                if (rs.next()) {
+                    inc = new Incidente();
+                    inc.setId(rs.getInt("id"));
+                    inc.setCodigoIncidente(rs.getString("codigo_incidente"));
+                    
+                    // Mapeo del informe 1:1
+                    InformeIncidente inf = new InformeIncidente();
+                    inf.setId(rs.getInt("inf_id"));
+                    inf.setMalwareDetectado(rs.getBoolean("malware_detectado"));
+                    inf.setNivelSeveridad(rs.getInt("nivel_severidad"));
+                    inf.setConclusion(rs.getString("conclusion"));
+                    
+                    inc.setInforme(inf);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            motorSql.disconnect();
+        }
+        return inc;
+    }
     // Bloque 6: BONUS_QUERY_ADVANCED - INCIDENTES_CRITICOS
     // Justificación: Esta consulta vive aquí y no en AbstractDAO porque es 
     // específica del dominio de Incidente. Utilizamos INNER JOIN para hidratar 
