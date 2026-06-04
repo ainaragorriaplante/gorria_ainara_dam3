@@ -20,6 +20,8 @@ public class Incidente {
 
     // Constructor 
     
+    public Incidente() {}
+    
     public Incidente(int id, String codigoIncidente, String tipoIncidente, java.sql.Date fechaDeteccion, String estado, Soc soc, InformeIncidente informe) {
         this.id = id;
         this.codigoIncidente = codigoIncidente;

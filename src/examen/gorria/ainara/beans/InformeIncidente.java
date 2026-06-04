@@ -13,6 +13,7 @@ public class InformeIncidente {
     private boolean malwareDetectado;
     private int nivelSeveridad;
     private String conclusion;
+    private int fkIncidenteId;
 
     //constructores
     public InformeIncidente() {}
@@ -21,6 +22,13 @@ public class InformeIncidente {
         this.malwareDetectado = malwareDetectado;
         this.nivelSeveridad = nivelSeveridad;
         this.conclusion = conclusion;
+    }
+    public InformeIncidente(int id, boolean malwareDetectado, int nivelSeveridad, String conclusion, int fkIncidenteId) {
+        this.id = id;
+        this.malwareDetectado = malwareDetectado;
+        this.nivelSeveridad = nivelSeveridad;
+        this.conclusion = conclusion;
+        this.fkIncidenteId = fkIncidenteId;
     }
     // Getters y Setters correspondientes...
     public int getId() {
@@ -46,6 +54,12 @@ public class InformeIncidente {
     }
     public void setConclusion(String conclusion) {
         this.conclusion = conclusion;
+    }
+    public int getFkIncidenteId() {
+        return fkIncidenteId;
+    }
+    public void setFkIncidenteId(int fkIncidenteId) {
+        this.fkIncidenteId = fkIncidenteId;
     }
 
     //toString
