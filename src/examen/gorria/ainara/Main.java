@@ -6,14 +6,6 @@ EXAMEN JDBC AWS RDS
 FECHA: 04/06/2026
 =========================================
 */
-/*
-=========================================
-AUTOR: NOMBRE APELLIDOS
-GRUPO: DAM3
-EXAMEN JDBC AWS RDS
-FECHA: 04/06/2026
-=========================================
-*/
 package examen.gorria.ainara;
 
 import examen.gorria.ainara.dao.*;
