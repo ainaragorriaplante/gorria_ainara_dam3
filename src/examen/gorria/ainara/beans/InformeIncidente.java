@@ -6,7 +6,7 @@ EXAMEN JDBC AWS RDS
 FECHA: 04/06/2026
 =========================================
 */
-package examen.apellido.nombre.beans;
+package examen.gorria.ainara.beans;
 
 public class InformeIncidente {
     private int id;
